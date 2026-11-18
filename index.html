@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>منصة الفيزياء التفاعلية – الثالث المتوسط</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Noto+Kufi+Arabic:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header id="top">
+  <div class="bar">
+    <a class="brand" href="#home"><i aria-hidden="true"></i><span>فيزياء الثالث المتوسط</span></a>
+    <nav id="nav" aria-label="أقسام المنصة">
+      <a href="#home" data-r="home">الرئيسية</a>
+      <a href="#map" data-r="map">المخطط</a>
+      <a href="#lesson-1-1" data-r="lesson">الدروس</a>
+      <a href="#lab" data-r="lab">المختبر</a>
+      <a href="#problems" data-r="problems">المسائل</a>
+      <a href="#quiz" data-r="quiz">الاختبارات</a>
+      <a href="#cards" data-r="cards">البطاقات</a>
+      <a href="#tutor" data-r="tutor">المدرس</a>
+      <a href="#progress" data-r="progress">التقدم</a>
+    </nav>
+    <button id="theme" type="button" aria-label="تبديل السمة">داكن</button>
+  </div>
+</header>
+<main id="app"><p class="muted">جارٍ تحميل المنهج…</p></main>
+<script src="js/util.js"></script>
+<script src="js/figs.js"></script>
+<script src="js/app.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/problems.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/tutor.js"></script>
+<script src="js/map.js"></script>
+<script src="js/lab.js"></script>
+<script src="data/curriculum.js"></script>
+<script>
+  P.initTheme();
+  (window.CURRICULUM ? Promise.resolve(window.CURRICULUM) : fetch('data/curriculum.json').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }))
+    .then(D => { P.init(D); P.start(); })
+    .catch(e => { document.getElementById('app').innerHTML = '<div class="box warnbox"><b>تعذّر تحميل محتوى المنهج.</b> أعد تحميل الصفحة. (' + e.message + ')</div>'; });
+</script>
+</body>
+</html>
